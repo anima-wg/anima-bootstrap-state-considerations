@@ -1,0 +1,224 @@
+
+
+
+
+Network Working Group                                      M. Richardson
+Internet-Draft                                                       SSW
+Intended status: Informational                          January 15, 2016
+Expires: July 18, 2016
+
+
+Considerations for stateful vs stateless join router in ANIMA bootstrap
+        draft-richardson-anima-bootstrap-state-considerations-00
+
+Abstract
+
+   This document explores a number of issues affecting the decision to
+   use a stateful or stateless forwarding mechanism by the join router
+   (aka join assistant) during the bootstrap process for ANIMA.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on July 18, 2016.
+
+Copyright Notice
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+Richardson                Expires July 18, 2016                 [Page 1]
+
+Internet-Draft            anima-bootstrap-state             January 2016
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Purpose of the Joiner Router/Join Assistant . . . . . . . . .   2
+   3.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
+   4.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     4.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
+     4.2.  Informative References  . . . . . . . . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+
+1.  Introduction
+
+   The [I-D.pritikin-anima-bootstrapping-keyinfra] defines a process to
+   securely enroll new devices in an existing network.  It order to
+   avoid providing globally reachable addresses to the prospective new
+   network member, it assumes that a Join Router.  The role of this
+   router is common in this kind of architecture.
+
+1.1.  Terminology
+
+   EAP [RFC5247], 802.1X and PANA [RFC5191] use the term Authenticator
+   to refer this role.
+
+   The Thread architecture [threadcommish] uses the term Joiner Router
+
+   The 6tisch architecture ([I-D.ietf-6tisch-terminology]) uses the term
+   JA, short for Join Assistant.
+
+2.  Purpose of the Joiner Router/Join Assistant
+
+   This device is one layer-2 hop from the new device.  In addition to
+   whatever secured networks it might connect to, it runs a sufficiently
+   unprotected network (either physical or wireless) such that a new
+   device can connect at layer-2 without any specific credentials.
+
+   The new node runs a discovery protocol as explained in
+   [I-D.pritikin-anima-bootstrapping-keyinfra] to find an address for a
+   registrar to which it can run the Enrollment over Secure Transport
+   (EST, [RFC7030].  EST runs RESTfully over protocols such as HTTP.
+
+   The new node does not have a globally routable address, so it can not
+   speak directly outside the current link.  This an intentional
+   limitation so that the new node can neither be easily attacked from
+   the general internet, nor can it attack arbitrary parts of the
+   Internet.
+
+
+
+
+
+Richardson                Expires July 18, 2016                 [Page 2]
+
+Internet-Draft            anima-bootstrap-state             January 2016
+
+
+   The Joiner Router provides a limited channel between the new node,
+   and the Registrar.  This document is about the various options and
+   considerations that need to be considered when chosing this limited
+   channel.
+
+   An additional goal of this document is to outline which methods could
+   be interchangeably be used by private negotiation between the Joining
+   Router and the Registar, without the knowledge of the New Node.
+
+3.  Security Considerations
+
+   STUFF
+
+4.  References
+
+4.1.  Normative References
+
+   [I-D.ietf-6tisch-terminology]
+              Palattella, M., Thubert, P., Watteyne, T., and Q. Wang,
+              "Terminology in IPv6 over the TSCH mode of IEEE
+              802.15.4e", draft-ietf-6tisch-terminology-06 (work in
+              progress), November 2015.
+
+   [I-D.pritikin-anima-bootstrapping-keyinfra]
+              Pritikin, M., Richardson, M., Behringer, M., and S.
+              Bjarnason, "Bootstrapping Key Infrastructures", draft-
+              pritikin-anima-bootstrapping-keyinfra-02 (work in
+              progress), July 2015.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC5191]  Forsberg, D., Ohba, Y., Patil, B., Tschofenig, H., and A.
+              Yegin, "Protocol for Carrying Authentication for Network
+              Access (PANA)", RFC 5191, May 2008.
+
+   [RFC5247]  Aboba, B., Simon, D., and P. Eronen, "Extensible
+              Authentication Protocol (EAP) Key Management Framework",
+              RFC 5247, August 2008.
+
+   [RFC7030]  Pritikin, M., Ed., Yee, P., Ed., and D. Harkins, Ed.,
+              "Enrollment over Secure Transport", RFC 7030, DOI
+              10.17487/RFC7030, October 2013,
+              <http://www.rfc-editor.org/info/rfc7030>.
+
+
+
+
+
+
+
+Richardson                Expires July 18, 2016                 [Page 3]
+
+Internet-Draft            anima-bootstrap-state             January 2016
+
+
+4.2.  Informative References
+
+   [threadcommish]
+              Thread Consortium, , "Thread Commissioning", Jul 2015,
+              <http://threadgroup.org/Portals/0/documents/whitepapers/
+              Thread%20Commissioning%20white%20paper_v2_public.pdf>.
+
+Author's Address
+
+   Michael C. Richardson
+   Sandelman Software Works
+   470 Dawson Avenue
+   Ottawa, ON  K1Z 5V7
+   CA
+
+   Email: mcr+ietf@sandelman.ca
+   URI:   http://www.sandelman.ca/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Richardson                Expires July 18, 2016                 [Page 4]

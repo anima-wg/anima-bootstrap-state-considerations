@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+<rfc category="info" docName="draft-richardson-anima-bootstrap-state-considerations-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="anima-bootstrap-state">Considerations for stateful vs stateless join router in ANIMA bootstrap</title>
+
+    <author fullname="Michael C. Richardson" initials="M."
+            surname="Richardson">
+      <organization abbrev="SSW">Sandelman Software Works</organization>
+
+      <address>
+        <postal>
+          <street>470 Dawson Avenue</street>
+
+          <city>Ottawa</city>
+
+          <region>ON</region>
+
+          <code>K1Z 5V7</code>
+
+          <country>CA</country>
+        </postal>
+
+        <email>mcr+ietf@sandelman.ca</email>
+
+        <uri>http://www.sandelman.ca/</uri>
+      </address>
+    </author>
+
+    <date year="2016"/>
+
+    <abstract>
+      <t>
+        This document explores a number of issues affecting the decision to
+        use a stateful or stateless forwarding mechanism by the join router (aka join assistant) during the bootstrap process for ANIMA.
+      </t>
+    </abstract>
+
+  </front>
+
+  <middle>
+    <section title=" Introduction">
+      <!-- 1, line 116-->
+
+      <t>The <xref target="I-D.pritikin-anima-bootstrapping-keyinfra" />
+      defines a process to securely enroll new devices in an existing network.
+      It order to avoid providing globally reachable addresses to the
+      prospective new network member, it assumes that a Join Router.
+      The role of this router is common in this kind of architecture.
+      </t>
+      <section title=" Terminology">
+        <t>
+          EAP <xref target="RFC5247" />, 802.1X and PANA <xref target="RFC5191" />
+          use the term Authenticator to refer this role.
+        </t>
+        <t>
+        The Thread architecture <xref target="threadcommish" /> uses the term
+        Joiner Router</t>
+        <t>
+          The 6tisch architecture (<xref target="I-D.ietf-6tisch-terminology"/>)
+          uses the term JA, short for Join Assistant.
+        </t>
+        
+      </section>
+
+      <!-- ends: "1.1 from line 149-->
+    </section>
+
+    <!-- ends: "1 from line 116-->
+    <section title="Purpose of the Joiner Router/Join Assistant">
+
+      <t>This device is one layer-2 hop from the new device.  In addition to
+      whatever secured networks it might connect to, it runs 
+      a sufficiently unprotected network (either physical or wireless) such
+      that a new device can connect at layer-2 without any specific
+      credentials.</t>
+      
+      <t>
+        The new node runs a discovery protocol as explained in
+        <xref target="I-D.pritikin-anima-bootstrapping-keyinfra" />
+        to find an address for a registrar to which it can run the
+        Enrollment over Secure Transport (EST, <xref target="RFC7030" />.
+        EST runs RESTfully over protocols such as HTTP.
+      </t>
+
+      <t>
+        The new node does not have a globally routable address, so it can not
+        speak directly outside the current link.  This an intentional
+        limitation so that the new node can neither be easily attacked from
+        the general internet, nor can it attack arbitrary parts of the
+        Internet.
+      </t>
+      <t>
+        The Joiner Router provides a limited channel between the new node,
+        and the Registrar.  This document is about the various options and
+        considerations that need to be considered when chosing this limited
+        channel.
+      </t>
+      <t>       
+        An additional goal of this document is to outline which methods could
+        be interchangeably be used by private negotiation between the Joining
+        Router and the Registar, without the knowledge of the New Node.
+      </t>
+    </section>
+
+    <section title=" Security Considerations">
+
+      <t>STUFF</t>
+    </section>
+
+
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.2119" ?>
+      <?rfc include="reference.RFC.5191" ?>
+      <?rfc include="reference.RFC.5247" ?>
+      <?rfc include="reference.RFC.7030" ?>
+      <?rfc include="reference.I-D.pritikin-anima-bootstrapping-keyinfra" ?>
+      <?rfc include="reference.I-D.ietf-6tisch-terminology" ?>>
+    </references>
+    <references title="Informative References">
+      <reference anchor="threadcommish"
+                 target="http://threadgroup.org/Portals/0/documents/whitepapers/Thread%20Commissioning%20white%20paper_v2_public.pdf">
+        <front>
+          <title>Thread Commissioning</title>
+          <author surname="Thread Consortium"></author>
+          <date month="Jul" year="2015" />
+        </front>
+      </reference>
+
+      <!--  -->
+    </references>
+  </back>
+</rfc>
+
