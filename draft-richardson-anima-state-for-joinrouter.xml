@@ -8,7 +8,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="info" docName="draft-richardson-anima-bootstrap-state-considerations-00"
+<rfc category="info" docName="draft-richardson-anima-state-for-joinrouter-00"
      ipr="trust200902">
   <front>
     <title abbrev="anima-bootstrap-state">Considerations for stateful vs stateless join router in ANIMA bootstrap</title>

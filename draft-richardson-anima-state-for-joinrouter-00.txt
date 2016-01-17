@@ -9,7 +9,7 @@ Expires: July 19, 2016
 
 
 Considerations for stateful vs stateless join router in ANIMA bootstrap
-        draft-richardson-anima-bootstrap-state-considerations-00
+             draft-richardson-anima-state-for-joinrouter-00
 
 Abstract
 

@@ -1,5 +1,5 @@
 VERSION=00
-DRAFT=draft-richardson-anima-bootstrap-state-considerations
+DRAFT=draft-richardson-anima-state-for-joinrouter
 
 ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	cp ${DRAFT}.txt ${DRAFT}-${VERSION}.txt
